@@ -20,14 +20,42 @@ const ShoppingList = () => {
           onClick={() => {
             const name = prompt("Enter Item")
             if(name) {
-              setItems((prev) => {
-                items: [...prev.items, {id: uuid(), name}]
-              })
+              setItems(prevState => [...prevState, {items: {id: uuid(), name}}]);
             }
+            // if(name) {
+            //   setItems((prev) => {
+            //     items: [...prev.items, {id: uuid(), name}]
+            //   })
+            // }
           }}
         >
           Add Item
         </Button>
+
+        <ListGroup>
+          <TransitionGroup className="shopping-list">
+            {
+              items.map(({id, name}) => {
+                return (
+                  <CSSTransition key={id} timeout={500} classNames="fade">
+                    <ListGroupItem>
+                      <Button 
+                        className="remove-btn" 
+                        color="danger" 
+                        size="sm" 
+                        onClick={() => {
+                        }}
+                      >
+                        
+                      </Button>
+                      {name}
+                    </ListGroupItem>
+                  </CSSTransition>
+                )
+              })
+            }
+          </TransitionGroup>
+        </ListGroup>
       </Container>    
     </div>
   )
